@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,9 +15,13 @@ public class MainActivity extends AppCompatActivity {
     // 6 7 8
     public Square[] squares = new Square[9];
     public int currentTurn = 2;
+    private boolean gameOver = false;
 
 
     public void onClick(View v) {
+
+        if (gameOver) return;
+
         for (int i = 0; i < 9; i++) {
             if (squares[i].getButton() == v) {
                 if (squares[i].getShape() == 0) {
@@ -47,9 +52,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void declareTie() {
+        Toast.makeText(getApplicationContext(), "Game over - tie !",
+                Toast.LENGTH_SHORT).show();
         Log.i("Game ended no winner", "");
     }
     public void declareWinner() {
+        gameOver = true;
+        String winner;
+        if(currentTurn==2) winner="X";
+        else winner="O";
+        Toast.makeText(getApplicationContext(), "And the winner is: "+ winner,
+                Toast.LENGTH_SHORT).show();
         Log.i("Winner is:", Integer.toString(currentTurn));
     }
 
@@ -72,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         // clear board
     public void whenClearClicked(View V) {
+        gameOver = false;
         for (int i = 0; i < 9; i++)
             squares[i].setShape(0);
 

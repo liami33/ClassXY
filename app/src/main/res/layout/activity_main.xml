@@ -197,7 +197,8 @@
                 android:id="@+id/buttonC"
                 android:layout_column="7"
                 android:onClick="whenClearClicked"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="#37feff" />
         </TableRow>
     </TableLayout>
 </RelativeLayout>

@@ -24,44 +24,46 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 9; i++) {
             if (squares[i].getButton() == v) {
+                // checks if the clicked square is empty
                 if (squares[i].getShape() == 0) {
+                    // 1. set the clicked square's shape to current player's shape
                     squares[i].setShape(currentTurn);
-                    if (currentTurn == 1) {
+                    // 2. switch turns (currentTurn changes from 1 to 2 and vice versa)
+                    if (currentTurn == 1)
                         currentTurn = 2;
-                    }
                     else currentTurn = 1;
                 }
 
             }
-            if ((squares[0].getShape()==squares[1].getShape() & squares[1].getShape()==squares[2].getShape() & squares[2].getShape() !=0) ||
-                    (squares[3].getShape()==squares[4].getShape() & squares[4].getShape()==squares[5].getShape()& squares[5].getShape() !=0) ||
-                    (squares[6].getShape()==squares[7].getShape() & squares[7].getShape()==squares[8].getShape()& squares[8].getShape() !=0) ||
-                    (squares[0].getShape()==squares[3].getShape() & squares[3].getShape()==squares[6].getShape()& squares[6].getShape() !=0) ||
-                    (squares[1].getShape()==squares[4].getShape() & squares[4].getShape()==squares[7].getShape()& squares[7].getShape() !=0) ||
-                    (squares[2].getShape()==squares[5].getShape() & squares[5].getShape()==squares[8].getShape()& squares[8].getShape() !=0) ||
-                    (squares[0].getShape()==squares[4].getShape() & squares[4].getShape()==squares[8].getShape()& squares[4].getShape() !=0) ||
-                    (squares[6].getShape()==squares[4].getShape() & squares[4].getShape()==squares[2].getShape()& squares[2].getShape() !=0))
-                declareWinner();
-            else if (squares[0].getShape() !=0 & squares[1].getShape()!=0 & squares[2].getShape() !=0 & squares[3].getShape()!=0 & squares[4].getShape() !=0
-                    & squares[5].getShape() !=0 & squares[6].getShape()!=0 & squares[7].getShape() !=0 & squares[8].getShape()!=0)
-                declareTie();
-
         }
-
+        if ((squares[0].getShape() == squares[1].getShape() & squares[1].getShape() == squares[2].getShape() & squares[2].getShape() != 0) ||
+                (squares[3].getShape() == squares[4].getShape() & squares[4].getShape() == squares[5].getShape() & squares[5].getShape() != 0) ||
+                (squares[6].getShape() == squares[7].getShape() & squares[7].getShape() == squares[8].getShape() & squares[8].getShape() != 0) ||
+                (squares[0].getShape() == squares[3].getShape() & squares[3].getShape() == squares[6].getShape() & squares[6].getShape() != 0) ||
+                (squares[1].getShape() == squares[4].getShape() & squares[4].getShape() == squares[7].getShape() & squares[7].getShape() != 0) ||
+                (squares[2].getShape() == squares[5].getShape() & squares[5].getShape() == squares[8].getShape() & squares[8].getShape() != 0) ||
+                (squares[0].getShape() == squares[4].getShape() & squares[4].getShape() == squares[8].getShape() & squares[4].getShape() != 0) ||
+                (squares[6].getShape() == squares[4].getShape() & squares[4].getShape() == squares[2].getShape() & squares[2].getShape() != 0))
+            declareWinner();
+        else if (squares[0].getShape() != 0 & squares[1].getShape() != 0 & squares[2].getShape() != 0 & squares[3].getShape() != 0 & squares[4].getShape() != 0
+                & squares[5].getShape() != 0 & squares[6].getShape() != 0 & squares[7].getShape() != 0 & squares[8].getShape() != 0)
+            declareTie();
 
     }
+
 
     public void declareTie() {
         Toast.makeText(getApplicationContext(), "Game over - tie !",
                 Toast.LENGTH_SHORT).show();
         Log.i("Game ended no winner", "");
     }
+
     public void declareWinner() {
         gameOver = true;
         String winner;
-        if(currentTurn==2) winner="X";
-        else winner="O";
-        Toast.makeText(getApplicationContext(), "And the winner is: "+ winner,
+        if (currentTurn == 2) winner = "X";
+        else winner = "O";
+        Toast.makeText(getApplicationContext(), "And the winner is: " + winner,
                 Toast.LENGTH_SHORT).show();
         Log.i("Winner is:", Integer.toString(currentTurn));
     }
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         squares[8] = new Square(findViewById(R.id.button9));
     }
 
-        // clear board
+    // clear board
     public void whenClearClicked(View V) {
         gameOver = false;
         for (int i = 0; i < 9; i++)

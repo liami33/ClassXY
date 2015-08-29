@@ -12,14 +12,16 @@ public class Square {
     // 1 = X
     // 2 = O
     private int shape;
-    private View button;
+    // "button" field holds a reference to the matching button in the UI
+    private Button button;
 
     public Square(View v) {
         this.shape = 0;
-        this.button = v;
-        Button b = (Button) button;
-        b.setText("");
+        this.button = (Button) v;
+        // button IS-A view, but view ISN'T a button !!!!!!
+        button.setText("");
     }
+
 
     public View getButton() {
         return button;
@@ -27,10 +29,9 @@ public class Square {
 
     public void setShape(int s) {
         shape = s;
-        Button b = (Button) button;
-        if (shape == 0) b.setText("");
-        if (shape == 1) b.setText("X");
-        if (shape == 2) b.setText("O");
+        if (shape == 0) button.setText("");
+        if (shape == 1) button.setText("X");
+        if (shape == 2) button.setText("O");
     }
 
     public int getShape() {
